@@ -39,9 +39,11 @@ public class ProductController {
 
 
     //Récupérer un produit par son Id
-    public Product afficherUnProduit() {
-        return null;
+    @GetMapping(value = "/Produits/{productid}")
+    public Product afficherUnProduit(@PathVariable int productid) {
+        return productDao.findById(productid);
     }
+
 
 
 
@@ -65,11 +67,16 @@ public class ProductController {
     }
 
     // supprimer un produit
-    public void supprimerProduit() {
+    @DeleteMapping(value ="/Produits/{productid}")
+    public void supprimerProduit(@PathVariable int productid) {productDao.delete(productid);
     }
 
     // Mettre à jour un produit
+    @PutMapping (value = "/Porduits")
     public void updateProduit(@RequestBody Product product) {
+        productDao.findById(product.getId()).setNom(product.getNom());
+        productDao.findById(product.getId()).setPrix(product.getPrix());
+        productDao.findById(product.getId()).setPrixAchat(product.getPrixAchat());
     }
 
 
