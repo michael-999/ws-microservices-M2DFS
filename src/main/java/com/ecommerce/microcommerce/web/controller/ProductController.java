@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@RestController
 public class ProductController {
 
     @Autowired
@@ -97,6 +97,10 @@ public class ProductController {
        }
        return result;
    }
-
+    //Tri par ordre alphabétique
+    @RequestMapping(value = "/ProduitsOrderByName", method = RequestMethod.GET)
+    public List<Product> trierProduitsParOrdreAlphabetique() {
+        return productDao.findByOrderByNomAsc();
+    }
 
 }
