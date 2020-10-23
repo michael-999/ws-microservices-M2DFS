@@ -39,7 +39,7 @@ public class ProductController {
 
 
     //Récupérer un produit par son Id
-    @GetMapping(value = "/Produits/{productid}")
+    @GetMapping(value = "/Produit/{productid}")
     public Product afficherUnProduit(@PathVariable int productid) {
         return productDao.findById(productid);
     }
@@ -49,7 +49,7 @@ public class ProductController {
 
 
     //ajouter un produit
-    @PostMapping(value = "/Produits")
+    @PostMapping(value = "/Produit")
     public ResponseEntity<Void> ajouterProduit(@Valid @RequestBody Product product) {
 
         Product productAdded =  productDao.save(product);
@@ -67,16 +67,14 @@ public class ProductController {
     }
 
     // supprimer un produit
-    @DeleteMapping(value ="/Produits/{productid}")
+    @DeleteMapping(value ="/Produit/{productid}")
     public void supprimerProduit(@PathVariable int productid) {productDao.delete(productid);
     }
 
     // Mettre à jour un produit
-    @PutMapping (value = "/Porduits")
+    @PutMapping (value = "/Produit")
     public void updateProduit(@RequestBody Product product) {
-        productDao.findById(product.getId()).setNom(product.getNom());
-        productDao.findById(product.getId()).setPrix(product.getPrix());
-        productDao.findById(product.getId()).setPrixAchat(product.getPrixAchat());
+        productDao.chercherUnProduitCher(400);
     }
 
 
@@ -86,6 +84,10 @@ public class ProductController {
         return productDao.chercherUnProduitCher(400);
     }
 
+
+
+    // calculer la marge produit
+    @GetMapping(value = "/AdminProduits")
 
 
 }
